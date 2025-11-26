@@ -48,9 +48,9 @@ The network is organized into three layers:
 
 ### Uniform AS Numbering
 Each pod is treated as a **BGP confederation**, allowing reuse of AS numbers without conflicts:  
-- Spine ASNs: `65401-65500`  
-- Fabric ASNs: `65301-65304`  
-- TOR ASNs: `65201-65299`  
+- Spine ASNs: 65401-65500 
+- Fabric ASNs: 65301-65304
+- TOR ASNs: 65201-65299 
 
 This makes routing predictable and simplifies automation.
 
@@ -70,18 +70,18 @@ Policies are applied per VIP using **BGP communities**, so upstream devices adju
 
 ## Automation Pipeline
 
-### Pod Setup (`podSetup.py`)
+### Pod Setup (podSetup.py)
 - Automatically configures Spine, Fabric, and TOR switches.  
 - Sets up BGP sessions, loopbacks, and eBGP multihop links.  
 - Uses the ASN and IP plan described above.  
 - Makes adding new pods fast and error-free.
 
-### State Management (`state_change.py`)
+### State Management (state_change.py)
 - Handles **LIVE → DRAIN** and **DRAIN → LIVE** transitions with **WARM** as an intermediate step.  
 - Automatically updates BGP community for the VIP and propagates it to all peers.  
 - Ensures traffic shifts gracefully without disruption.
 
-### Test & Emulation Framework (`test_framework.py`)
+### Test & Emulation Framework (test_framework.py)
 Inspired by Meta’s **unit → emulation → canary pipeline**, this framework validates configuration correctness and traffic behavior:  
 - **Unit Tests:** Check BGP configuration correctness (ASN, neighbor IPs, loopbacks).  
 - **Emulation:** Simulate traffic for VIPs and ensure upstream routing changes as expected when states change.  
