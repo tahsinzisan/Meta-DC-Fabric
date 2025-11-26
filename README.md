@@ -3,7 +3,7 @@
 ## Project Overview
 In this project, I replicated **Meta’s pod-based Clos data center fabric** in a lab setting. The goal was to simulate a hyperscale data center where traffic is distributed efficiently across multiple racks and pods using **Anycast VIPs** and **ECMP load balancing**.
 
-Instead of building large clusters, this design uses pods — small, identical Layer-3 building blocks that are easy to scale. Each pod has its own TOR switches and connects into multiple spine planes, so every rack has uniform, high-bandwidth connectivity to every other rack in the data center. There is no “in-cluster vs out-of-cluster” penalty — all traffic is fabric traffic.
+Instead of building large clusters, this design uses pods — small, identical Layer-3 building blocks that are easy to scale. Each pod has its own TOR switches and connects into multiple spine planes, so every rack has uniform, high-bandwidth connectivity to every other rack in the data center.
 
 Adding more compute? Add pods. Need more bandwidth? Add spines. The routing is BGP everywhere, fully L3, with ECMP for load-sharing and fast recovery. In this implementation, each pod contains 10 TORs — smaller than Meta’s production design but following the same principles of simplicity, resiliency, and horizontal scalability
 
